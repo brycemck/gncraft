@@ -56,7 +56,7 @@ module.exports = {
           })
         }
       } else {
-        that.embeddedMessage.fields.push({name: 'You must be a Minecraft Admin to do this.', value: `Please tag @${DISCORD_MINECRAFTADMIN_ROLE_NAME} if you need assistance.`})
+        that.embeddedMessage.fields.push({name: 'You must be a Minecraft Admin to do this.', value: `Please tag @${process.env.DISCORD_MINECRAFTADMIN_ROLE_NAME} if you need assistance.`})
         return interaction.reply({embeds: [that.embeddedMessage]})
       }
     }
