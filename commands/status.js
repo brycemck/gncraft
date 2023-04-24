@@ -34,10 +34,12 @@ module.exports = {
 
       that.process().then((responseField) => {
         let messageReply = '';
-        messageReply += `\n**Online Players:** ${responseField.players.online}`;
+        that.embeddedMessage.fields = []
+        
+        messageReply += `\nOnline Players: ${responseField.players.online}`;
         if (responseField.players.online > 0) messageReply += ` (${responseField.players.sample.map(player => player.name).join(', ')})`
-        messageReply += `\n**Server Version:** ${responseField.version.name}`;
-        messageReply += `\n**Round Trip Latency:** ${responseField.roundTripLatency}`;
+        messageReply += `\nServer Version: ${responseField.version.name}`;
+        messageReply += `\nRound Trip Latency: ${responseField.roundTripLatency}`;
 
         that.embeddedMessage.fields.push({name: 'Server status', value: messageReply})
         return interaction.reply({embeds: [that.embeddedMessage]})

@@ -48,6 +48,8 @@ module.exports = {
     ],
     run: async (client, interaction) => {
       const that = module.exports;
+      that.embeddedMessage.fields = []
+      
       if (interaction.member.roles.cache.has(process.env.DISCORD_MINECRAFTADMIN_ROLE_ID)) {
         if (interaction.options.getString('command')) {
           that.process(interaction.options.getString('command')).then((responseField) => {
