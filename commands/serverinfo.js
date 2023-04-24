@@ -4,10 +4,12 @@ dotenv.config();
 
 const mcServerIP = process.env.MC_SERVER_IP;
 const mcServerHostname = process.env.MC_SERVER_HOSTNAME;
+const mcConnectionInfoChannel = process.env.DISCORD_CONNECTION_INFO_CHANNEL_ID;
 const mcQueryPort = process.env.MC_QUERY_PORT;
+const mcModloader = process.env.MODLOADER;
 
 module.exports = {
-  name: 'status',
+  name: 'serverinfo',
   description: 'Queries the Minecraft server to see status and active players.',
   usage: '',
   embeddedMessage: {
@@ -32,16 +34,18 @@ module.exports = {
     run: async (client, interaction) => {
       const that = module.exports;
 
+      that.embeddedMessage.fields = []
       that.process().then((responseField) => {
-        let messageReply = '';
-        that.embeddedMessage.fields = []
-        
-        messageReply += `\nOnline Players: ${responseField.players.online}`;
-        if (responseField.players.online > 0) messageReply += ` (${responseField.players.sample.map(player => player.name).join(', ')})`
-        messageReply += `\nServer Version: ${responseField.version.name}`;
-        messageReply += `\nRound Trip Latency: ${responseField.roundTripLatency}`;
+        let message = '';
 
-        that.embeddedMessage.fields.push({name: 'Server status', value: messageReply})
+        message += `*Hostname*: ${mcServerHostname}`
+        message += `\n*MC Version*: ${responseField.version.name}`
+        message += `\n*Modloader*: ${mcModloader}`
+        message += `\n*Players Online:* ${responseField.players.online}`
+        if (responseField.players.online > 0) message += ` (${responseField.players.sample.map(player => player.name).join(', ')})`
+        message += `\n\nSee <#${mcConnectionInfoChannel}> for instructions on connecting.`
+
+        that.embeddedMessage.fields.push({name: 'Server info', value: message})
         return interaction.reply({embeds: [that.embeddedMessage]})
       })
     }

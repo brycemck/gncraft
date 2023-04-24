@@ -49,7 +49,7 @@ module.exports = {
     run: async (client, interaction) => {
       const that = module.exports;
       that.embeddedMessage.fields = []
-      
+
       if (interaction.member.roles.cache.has(process.env.DISCORD_MINECRAFTADMIN_ROLE_ID)) {
         if (interaction.options.getString('command')) {
           that.process(interaction.options.getString('command')).then((responseField) => {
@@ -58,7 +58,7 @@ module.exports = {
           })
         }
       } else {
-        that.embeddedMessage.fields.push({name: 'You must be a Minecraft Admin to do this.', value: `Please tag @${process.env.DISCORD_MINECRAFTADMIN_ROLE_NAME} if you need assistance.`})
+        that.embeddedMessage.fields.push({name: 'You must be an admin to do this.', value: `Please tag <@&${process.env.DISCORD_MINECRAFTADMIN_ROLE_ID}> if you need assistance.`})
         return interaction.reply({embeds: [that.embeddedMessage]})
       }
     }
