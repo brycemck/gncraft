@@ -4,7 +4,7 @@ dotenv.config();
 
 module.exports = {
   name: 'restart',
-  description: 'Use this command to restart the Minecraft service. Note that this does not do a full restart of the virtual machine, just the service itself.',
+  description: 'Restart the Minecraft service. Note: this does restart the virtual machine, just the service itself.',
   usage: '',
   embeddedMessage: {
     color: 0x0099FF,
