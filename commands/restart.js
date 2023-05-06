@@ -14,7 +14,7 @@ module.exports = {
   },
   process: () => {
     return new Promise((resolve, reject) => {
-      exec('sh /opt/restart-server.sh 9', (err, stdout, stderr) => {
+      exec('bash /opt/restart-server.sh 9', (err, stdout, stderr) => {
         if (err) {
           reject(err)
         } else {
