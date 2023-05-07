@@ -32,7 +32,7 @@ module.exports = {
 
       that.embeddedMessage.fields = [];
       that.process().then((response) => {
-        that.embeddedMessage.fields.push({name: 'Restarting Minecraft service...', value: `\`${response}\``})
+        that.embeddedMessage.fields.push({name: 'Restarting Minecraft service...', value: `Response: \`${response}\``})
         return interaction.reply({embeds: [that.embeddedMessage]})
       }).catch((err) => {
         that.embeddedMessage.fields.push({name: 'Error running restart', value: `\`${err}\``})
