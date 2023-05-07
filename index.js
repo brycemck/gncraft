@@ -13,13 +13,13 @@ client.commands = new Collection();
 client.slashCommands = [];
 
 // uncomment the below and replace the ID with the ID of a command you want to delete from the guild
-(async () => {
-    rest.delete(Routes.applicationGuildCommand(process.env.DISCORD_APP_ID, process.env.DISCORD_GUILD_ID, '1104478933363200000'))
-    .then(() => {
-        console.log('successfully deleted')
-    })
-    .catch((e) => { console.log(e) })
-})();
+// (async () => {
+//     rest.delete(Routes.applicationGuildCommand(process.env.DISCORD_APP_ID, process.env.DISCORD_GUILD_ID, '1104478933363200000'))
+//     .then(() => {
+//         console.log('successfully deleted')
+//     })
+//     .catch((e) => { console.log(e) })
+// })();
 
 let CommandsDir = path.join(__dirname, ".", "commands");
 fs.readdir(CommandsDir, (err, files) => {
