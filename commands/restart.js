@@ -19,7 +19,8 @@ module.exports = {
           reject(err)
         } else {
           console.log(stderr)
-          resolve(stdout)
+          console.log(stdout)
+          resolve('Sucessfully restarted the service, please wait a few minutes.')
         }
       })
     })
