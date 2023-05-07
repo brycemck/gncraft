@@ -31,6 +31,7 @@ module.exports = {
       const that = module.exports;
 
       that.embeddedMessage.fields = [];
+      await interaction.deferReply({ ephemeral: true });
       that.process().then((response) => {
         that.embeddedMessage.fields.push({name: 'Restarting Minecraft service...', value: `Response: \`${response}\``})
         return interaction.reply({embeds: [that.embeddedMessage]})
