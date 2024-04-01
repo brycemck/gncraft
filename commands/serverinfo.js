@@ -1,6 +1,7 @@
 const mcs = require('node-mcstatus');
 const dotenv = require('dotenv');
 dotenv.config();
+const Query = require("minecraft-query")
 
 const mcServerIP = process.env.MC_SERVER_IP;
 const mcServerHostname = process.env.MC_SERVER_HOSTNAME;
@@ -23,33 +24,12 @@ module.exports = {
       console.log("sjdhflsakjfdhlaskudfjhasdf")
       console.log(mcServerIP)
       console.log(mcQueryPort)
-      // mcUtil.status(mcServerIP, parseInt(mcQueryPort))
-      //   .then((result) => {
-      //     console.log('then')
-      //     resolve(result)
-      //   })
-      //   .catch((error) => {
-      //     console.log('catch')
-      //     reject(error)
-      //   });
-      // The `port` argument is optional and defaults
-      // to 25565. The `options` argument is optional.
-      mcs.statusJava(mcServerIP, mcQueryPort, { query: true })
+      mcs.statusJava(mcServerHostname, mcQueryPort, { query: true })
         .then((result) => {
-            // `result` will be the same shape and
-            // properties as what is documented on
-            // our website.
-            // https://mcstatus.io/docs#java-status
-            console.log('then')
+            console.log('then')            
             resolve(result)
         })
         .catch((error) => {
-            // If the server is offline, then
-            // you will NOT receive an error here.
-            // Instead, you will use the `result.online`
-            // boolean values in `.then()`.
-            // Receiving an error here means that there
-            // was an error with the service itself.
             console.log('catch')
             reject(error)
         })
@@ -62,15 +42,14 @@ module.exports = {
 
       that.embeddedMessage.fields = []
       that.process().then((responseField) => {
-        let message = 'test';
+        let message = '';
         console.log(responseField)
 
-        // message += `*Hostname*: ${mcServerHostname}`
-        // message += `\n*MC Version*: ${responseField.version.name}`
-        // message += `\n*Modloader*: ${mcModloader}`
-        // message += `\n*Players Online:* ${responseField.players.online}`
-        // if (responseField.players.online > 0) message += ` (${responseField.players.sample.map(player => player.name).join(', ')})`
-        // message += `\n\nSee <#${mcConnectionInfoChannel}> for instructions on connecting.`
+        message += `*Hostname*: ${responseField.host}\n`
+        message += `*Status*: ${(responseField.online) ? 'Online' : 'Offline'}`
+        message += `\n*MC Version*: ${responseField.version.name_raw}`
+        message += `\n*Modloader*: ${mcModloader}`
+        message += `\n*Players:* ${responseField.players.online}`
 
         that.embeddedMessage.fields.push({name: 'Server info', value: message})
         return interaction.reply({embeds: [that.embeddedMessage]})

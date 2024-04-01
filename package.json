@@ -13,6 +13,7 @@
     "child_process": "^1.0.2",
     "discord.js": "^14.9.0",
     "dotenv": "^16.0.3",
+    "minecraft-query": "^1.0.13",
     "node-mcstatus": "^1.1.0",
     "rcon-client": "^4.2.4"
   }
