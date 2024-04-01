@@ -14,7 +14,7 @@ client.slashCommands = [];
 
 // uncomment the below and replace the ID with the ID of a command you want to delete from the guild
 // (async () => {
-//     rest.delete(Routes.applicationGuildCommand(process.env.DISCORD_APP_ID, process.env.DISCORD_GUILD_ID, '1104478933363200000'))
+//     rest.delete(Routes.applicationGuildCommand(process.env.DISCORD_APP_ID, process.env.DISCORD_GUILD_ID, '1224290861295341601'))
 //     .then(() => {
 //         console.log('successfully deleted')
 //     })
@@ -75,7 +75,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
   const command = interaction.client.commands.get(interaction.commandName);
 
-  console.log(command)
+  // console.log(command)
   if (!command) {
     console.error(`No command matching ${interaction.commandName} was found.`);
     return;

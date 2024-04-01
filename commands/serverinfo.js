@@ -1,7 +1,6 @@
 const mcs = require('node-mcstatus');
 const dotenv = require('dotenv');
 dotenv.config();
-const Query = require("minecraft-query")
 
 const mcServerIP = process.env.MC_SERVER_IP;
 const mcServerHostname = process.env.MC_SERVER_HOSTNAME;
@@ -21,16 +20,13 @@ module.exports = {
   },
   process: () => {
     return new Promise((resolve, reject) => {
-      console.log("sjdhflsakjfdhlaskudfjhasdf")
       console.log(mcServerIP)
       console.log(mcQueryPort)
       mcs.statusJava(mcServerHostname, mcQueryPort, { query: true })
         .then((result) => {
-            console.log('then')            
             resolve(result)
         })
         .catch((error) => {
-            console.log('catch')
             reject(error)
         })
     })
@@ -43,13 +39,12 @@ module.exports = {
       that.embeddedMessage.fields = []
       that.process().then((responseField) => {
         let message = '';
-        console.log(responseField)
-
-        message += `*Hostname*: ${responseField.host}\n`
-        message += `*Status*: ${(responseField.online) ? 'Online' : 'Offline'}`
-        message += `\n*MC Version*: ${responseField.version.name_raw}`
-        message += `\n*Modloader*: ${mcModloader}`
-        message += `\n*Players:* ${responseField.players.online}`
+        message += `**Hostname**: ${responseField.host}`
+        message += `\n**Status**: ${(responseField.online) ? 'Online' : 'Offline'}`
+        message += `\n**MC Version**: ${responseField.version.name_raw}`
+        message += `\n**Modloader**: ${mcModloader}`
+        message += `\n**Players:** ${responseField.players.online}`
+        message += `\n[*Join instructions*](https://docs.google.com/document/d/15GVUB4UBDUyTzk_rViOFS-EXiPhnV56L-D4c6i7_Cjk/edit?usp=sharing)`
 
         that.embeddedMessage.fields.push({name: 'Server info', value: message})
         return interaction.reply({embeds: [that.embeddedMessage]})

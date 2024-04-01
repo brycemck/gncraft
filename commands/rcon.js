@@ -1,6 +1,5 @@
 const { EmbedBuilder, RoleSelectMenuBuilder } = require('discord.js');
 
-// const mcUtil = require('minecraft-server-util');
 const { Rcon } = require("rcon-client")
 const dotenv = require('dotenv');
 dotenv.config();
@@ -8,7 +7,6 @@ dotenv.config();
 const mcServerIP = process.env.MC_SERVER_IP;
 const mcRconPort = process.env.MC_RCON_PORT;
 const mcRconPassword = process.env.MC_RCON_PASSWORD;
-console.log('setupiud')
 
 module.exports = {
   name: 'rcon',
@@ -21,7 +19,6 @@ module.exports = {
     timestamp: new Date().toISOString()
   },
   process: (command) => {
-    console.log("running rcon command")
     return new Promise((resolve, reject) => {
       (async () => {
         try {
@@ -51,13 +48,9 @@ module.exports = {
     run: async (client, interaction) => {
       const that = module.exports;
       that.embeddedMessage.fields = []
-      console.log('hsesu')
       if (interaction.member.roles.cache.has(process.env.DISCORD_MINECRAFTADMIN_ROLE_ID)) {
-        console.log('has role')
         if (interaction.options.getString('command')) {
-          console.log('ryus;ousdf')
           that.process(interaction.options.getString('command')).then((responseField) => {
-            console.log('dsfsjdfnlsf')
             that.embeddedMessage.fields.push({name: 'RCON Response', value: responseField})
             return interaction.reply({embeds: [that.embeddedMessage]})
           })
