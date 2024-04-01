@@ -15,8 +15,7 @@ module.exports = {
   embeddedMessage: {
     color: 0x9013FE,
     title: 'EMMYBUNNMC SERVER',
-    fields: [],
-    timestamp: new Date().toISOString()
+    fields: []
   },
   process: (command) => {
     return new Promise((resolve, reject) => {
